@@ -1,13 +1,49 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+#root,
+html {
+  height: 100%;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* fonts */
+@font-face {
+  font-family: "Supercell Headline";
+  src: url("https://creators.supercell.com/fonts/SupercellHeadline-Heavy.f9cd15cb.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "SupercellText Medium";
+  src: url("https://creators.supercell.com/fonts/SupercellText-Medium.f1e41151.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "SupercellText Bold";
+  src: url("https://creators.supercell.com/fonts/SupercellText-Bold.b2cb1a05.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "SupercellText";
+  src: url("https://creators.supercell.com/fonts/SupercellText-Regular.386f0d07.woff2")
+    format("woff");
 }
