@@ -2,26 +2,19 @@ import React from "react";
 import styled from "@emotion/styled";
 import { ThemeProvider } from "@emotion/react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Box, Flex } from "./ui/layouts";
-import bg from "./assets/Rectangle.png";
-import background from "./assets/bgs.png";
-import { H1, H2, BigInput } from "./ui/atoms";
-import Header from "./screens/Header";
-import giphy from "./assets/giphy-4.gif";
-import giphy2 from "./assets/portaits.png";
-import giphy3 from "./assets/spike.jpg";
-import pass from "./assets/brawl_pass.png";
-import colt from "./assets/Colt-4.png";
-import emotes from "./assets/download.jpeg";
-import starforce from "./assets/36v08htum8d61.png";
-import mapbanners from "./assets/mapbanners.png";
-import Home from "./screens/Home";
-import Characters from "./screens/Characters";
-const theme = {
-  colors: {
-    primary: "hotpink"
-  }
-};
+import { Box, Flex } from "../ui/layouts";
+import bg from "../assets/Rectangle.png";
+import background from "../assets/bgs.png";
+import { useHistory } from "react-router-dom";
+import { H1, H2, BigInput } from "../ui/atoms";
+import giphy from "../assets/giphy-4.gif";
+import giphy2 from "../assets/portaits.png";
+import giphy3 from "../assets/spike.jpg";
+import pass from "../assets/brawl_pass.png";
+import colt from "../assets/Colt-4.png";
+import emotes from "../assets/download.jpeg";
+import starforce from "../assets/36v08htum8d61.png";
+import mapbanners from "../assets/mapbanners.png";
 
 const Grid = styled.div`
   width: 100%;
@@ -43,7 +36,7 @@ const data = [
   { name: "Map Banners", asset: mapbanners }
 ];
 
-const GridBlock = ({ item }) => (
+const GridBlock = ({ item, ...props }) => (
   <Box
     p={3}
     style={{
@@ -55,6 +48,7 @@ const GridBlock = ({ item }) => (
     }}
     bg="white"
     height="200px"
+    {...props}
   >
     <Box>
       <img
@@ -94,20 +88,29 @@ const GridBlock = ({ item }) => (
   </Box>
 );
 
-function App() {
+function Home() {
+  const history = useHistory();
   return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <Flex flex={1} height="100%" bg="white" flexDirection="column">
-          <Header />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/characters" exact component={Characters} />
-          </Switch>
-        </Flex>
-      </ThemeProvider>
-    </Router>
+    <Box p={3} flex={1}>
+      <Box
+        p={3}
+        pb={6}
+        m={-3}
+        mb={-6}
+        style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover" }}
+      >
+        <H1>Content Library</H1>
+        <Box width={1} mt={3}>
+          <BigInput placeholder="Search for assets by name, type, or tag" />
+        </Box>
+      </Box>
+      <Grid>
+        {data.map(item => (
+          <GridBlock item={item} onClick={() => history.push("/characters")} />
+        ))}
+      </Grid>
+    </Box>
   );
 }
 
-export default App;
+export default Home;
