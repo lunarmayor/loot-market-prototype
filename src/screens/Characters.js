@@ -88,7 +88,7 @@ const assets = [
     asset: bit2
   },
   {
-    name: "Dog",
+    name: "Colonel Ruff",
     asset: dog
   },
   {
@@ -100,11 +100,11 @@ const assets = [
     asset: amber2
   },
   {
-    name: "barely celebration",
+    name: "barley celebration",
     asset: barley2
   },
   {
-    name: "barely sad",
+    name: "barley sad",
     asset: barley3
   }
 ];
