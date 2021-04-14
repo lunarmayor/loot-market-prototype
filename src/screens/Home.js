@@ -99,7 +99,7 @@ function Home() {
         mb={-6}
         style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover" }}
       >
-        <H1>Content Library</H1>
+        <H1 style={{ color: "white" }}>Content Library</H1>
         <Box width={1} mt={3}>
           <BigInput placeholder="Search for assets by name, type, or tag" />
         </Box>

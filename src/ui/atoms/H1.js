@@ -4,7 +4,7 @@ import { spacing } from "styled-system";
 const H1 = styled.h1`
   margin: 0;
   font-size: 24px;
-  color: white;
+  color: black;
   font-family: SupercellText Bold;
 `;
 
