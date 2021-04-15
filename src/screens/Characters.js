@@ -25,11 +25,13 @@ import emotes from "../assets/download.jpeg";
 import starforce from "../assets/36v08htum8d61.png";
 import mapbanners from "../assets/mapbanners.png";
 import bit from "../assets/portrait_8bit.png";
+import bea2 from "../assets/Bea.png";
 import amber from "../assets/portrait_amber.png";
 import barely from "../assets/portrait_barley.png";
 import bea from "../assets/portrait_bea.png";
 import bibi from "../assets/portrait_bibi.png";
 import carl from "../assets/portrait_carl.png";
+import BeaEditor from "./BeaEditor";
 
 import bit2 from "../assets/8Bit-11.png";
 import amber2 from "../assets/Amber-41.png";
@@ -103,6 +105,10 @@ const assets = [
   {
     name: "Shelly",
     asset: shelly
+  },
+  {
+    name: "Bea",
+    asset: bea2
   },
   {
     name: "amber celebration",
@@ -199,6 +205,9 @@ function Home() {
   const [activeImage, setActiveImage] = useState(null);
 
   if (activeImage) {
+    if (activeImage === bea2) {
+      return <BeaEditor setActiveImage={setActiveImage} />;
+    }
     return (
       <Box flex={1} style={{ position: "relative", overflow: "hidden" }}>
         <Flex
