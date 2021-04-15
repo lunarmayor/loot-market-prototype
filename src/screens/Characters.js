@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { ThemeProvider } from "@emotion/react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -7,7 +7,11 @@ import Masonry from "react-masonry-css";
 import { Text as T } from "./Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import supercellLogo from "../assets/supercelllogo.png";
-import { faDownload, faHeart } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDownload,
+  faHeart,
+  faTimes
+} from "@fortawesome/free-solid-svg-icons";
 
 import bg from "../assets/Rectangle.png";
 import background from "../assets/bgs.png";
@@ -148,8 +152,8 @@ const Button = styled(Box)`
   border-radius: 8px;
 `;
 
-const Image = ({ asset, name }) => (
-  <Container>
+const Image = ({ asset, name, ...props }) => (
+  <Container {...props}>
     <img src={asset.asset} style={{ width: "100%" }} />
     <Overlay className="overlay">
       <Box style={{ position: "absolute", bottom: 10, right: 10 }}>
@@ -197,6 +201,43 @@ const Tag = ({ name, image }) => (
 );
 
 function Home() {
+  const [activeImage, setActiveImage] = useState(null);
+
+  if (activeImage) {
+    return (
+      <Box flex={1} style={{ position: "relative", overflow: "hidden" }}>
+        <Flex
+          onClick={() => setActiveImage(null)}
+          style={{
+            border: "1px solid #ddd",
+            position: "absolute",
+            top: 18,
+            left: 18,
+            zIndex: 1000,
+            borderRadius: 1000
+          }}
+          justifyContent="center"
+          alignItems="center"
+          width={50}
+          height={50}
+        >
+          <FontAwesomeIcon icon={faTimes} size="lg" color="rgba(0,0,0,0.7)" />
+        </Flex>
+        <Box
+          width={2 / 3}
+          p={3}
+          height="100%"
+          style={{ borderRight: "1px solid #ddd", overflow: "hidden" }}
+        >
+          <img
+            src={activeImage}
+            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+          />
+        </Box>
+      </Box>
+    );
+  }
+
   return (
     <Box p={3} flex={1}>
       <Box
@@ -221,7 +262,7 @@ function Home() {
         columnClassName="my-masonry-grid_column"
       >
         {assets.map(asset => (
-          <Image asset={asset} />
+          <Image asset={asset} onClick={() => setActiveImage(asset.asset)} />
         ))}
       </Masonry>
 

@@ -6,7 +6,7 @@ import logo from "../assets/kitlogo.svg";
 import avatar from "../assets/avatar.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import brawlstars from "../assets/brawlstarz.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 const Name = styled.div`
@@ -38,8 +38,14 @@ let pathToNav = {
   "/characters": "Characters"
 };
 
+let navToPath = {
+  Home: "/",
+  Characters: "/characters"
+};
+
 const Header = ({ activeSawbnav }) => {
   const location = useLocation();
+  const history = useHistory();
   const { pathname } = location;
 
   const activeSubnav = pathToNav[pathname];
@@ -107,7 +113,16 @@ const Header = ({ activeSawbnav }) => {
           "3D models",
           "Map Banners"
         ].map(subnav => (
-          <Box style={{ position: "relative" }} pb={3} mr={3}>
+          <Box
+            style={{ position: "relative" }}
+            pb={3}
+            mr={3}
+            onClick={() => {
+              if (navToPath[subnav]) {
+                history.push(navToPath[subnav]);
+              }
+            }}
+          >
             <Text>{subnav}</Text>
             {activeSubnav === subnav && (
               <Box
