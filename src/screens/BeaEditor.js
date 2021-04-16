@@ -13,7 +13,7 @@ import {
   faTimes
 } from "@fortawesome/free-solid-svg-icons";
 
-const BeaEditor = ({ setActiveImage }) => {
+const BeaEditor = ({ setActiveImage, sideBar }) => {
   useEffect(() => {
     let container = document.getElementById("bea");
     let { width, height } = container.getBoundingClientRect();
@@ -45,7 +45,6 @@ const BeaEditor = ({ setActiveImage }) => {
     //scene.add(dirLight);
 
     const loader = new FBXLoader();
-    console.log("hi");
 
     loader.load(process.env.PUBLIC_URL + "/bea/bea_geo.fbx", function(gltf) {
       let model = gltf;
@@ -96,7 +95,7 @@ const BeaEditor = ({ setActiveImage }) => {
     });
   }, []);
   return (
-    <Box flex={1} style={{ position: "relative", overflow: "hidden" }}>
+    <Flex flex={1} style={{ position: "relative", overflow: "hidden" }}>
       <Flex
         onClick={() => setActiveImage(null)}
         bg="white"
@@ -121,7 +120,8 @@ const BeaEditor = ({ setActiveImage }) => {
         height="100%"
         style={{ borderRight: "1px solid #ddd", overflow: "hidden" }}
       ></Box>
-    </Box>
+      {sideBar}
+    </Flex>
   );
 };
 

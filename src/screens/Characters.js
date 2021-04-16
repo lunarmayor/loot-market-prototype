@@ -10,7 +10,9 @@ import supercellLogo from "../assets/supercelllogo.png";
 import {
   faDownload,
   faHeart,
-  faTimes
+  faTimes,
+  faShare,
+  faFlag
 } from "@fortawesome/free-solid-svg-icons";
 
 import bg from "../assets/Rectangle.png";
@@ -240,7 +242,120 @@ function Home() {
   if (activeImage) {
     const activeObject = assets.find(a => a.asset === activeImage);
     if (activeImage === bea2) {
-      return <BeaEditor setActiveImage={setActiveImage} />;
+      return (
+        <BeaEditor
+          setActiveImage={setActiveImage}
+          sideBar={
+            <Flex flexDirection="column" width={1 / 3}>
+              <Box p={3} flex={1}>
+                <Flex justifyContent="space-between" mb={3}>
+                  <H1 style={{ fontSize: 20 }}>Bea</H1>
+                  <Box
+                    sx={{
+                      p: 1,
+                      color: "white",
+                      px: 2,
+                      borderRadius: 100,
+                      fontFamily: "SupercellText Bold",
+                      background: "rgba(72,50,220,1)"
+                    }}
+                  >
+                    3D Model
+                  </Box>
+                </Flex>
+                <Box mt={3}>
+                  <Text
+                    style={{
+                      color: "rgba(0,0,0,0.8)",
+                      fontFamily: "SupercellText",
+                      fontSize: 14
+                    }}
+                  >
+                    Attribution
+                  </Text>
+                  <Flex mt={2} alignItems="center">
+                    <img
+                      src={supercellLogo}
+                      style={{
+                        width: 25,
+                        marginRight: 8,
+                        borderRadius: 100,
+                        cursor: "pointer"
+                      }}
+                    />
+                    <Text
+                      style={{
+                        color: "rgba(0,0,0,0.8)",
+                        fontFamily: "SupercellText Medium"
+                      }}
+                    >
+                      Supercell
+                    </Text>
+                  </Flex>
+                </Box>
+
+                <Box mt={3}>
+                  <Text
+                    style={{
+                      color: "rgba(0,0,0,0.8)",
+                      fontFamily: "SupercellText",
+                      fontSize: 14
+                    }}
+                  >
+                    Size
+                  </Text>
+                  <Flex mt={2} alignItems="center">
+                    <Text
+                      style={{
+                        color: "rgba(0,0,0,0.8)",
+                        fontFamily: "SupercellText Medium"
+                      }}
+                    >
+                      40mb
+                    </Text>
+                  </Flex>
+                </Box>
+
+                <Box mt={3}>
+                  <Text
+                    style={{
+                      color: "rgba(0,0,0,0.8)",
+                      fontFamily: "SupercellText",
+                      fontSize: 14
+                    }}
+                  >
+                    Policy
+                  </Text>
+                  <Flex mt={2} alignItems="center">
+                    <Text
+                      style={{
+                        color: "rgba(0,0,0,0.8)",
+                        fontFamily: "SupercellText Medium"
+                      }}
+                    >
+                      Free to use
+                    </Text>
+                  </Flex>
+                </Box>
+              </Box>
+              <Box p={3} style={{ borderTop: "1px solid #ddd" }}>
+                <Box mb={3}>
+                  <GhostButton>Open Editor</GhostButton>
+                </Box>
+                <PrimaryButton>
+                  <Box mr={2}>
+                    <FontAwesomeIcon
+                      icon={faDownload}
+                      color="rgba(255,255,255,0.9)"
+                    />
+                  </Box>
+                  Download
+                </PrimaryButton>
+              </Box>
+            </Flex>
+          }
+        />
+      );
     }
     return (
       <Flex flex={1} style={{ position: "relative", overflow: "hidden" }}>
@@ -273,97 +388,121 @@ function Home() {
           />
         </Box>
         <Flex flexDirection="column" width={1 / 3}>
-          <Box p={3} flex={1}>
-            <Flex justifyContent="space-between" mb={3}>
-              <H1 style={{ fontSize: 20 }}>{activeObject.name}</H1>
-              <Box
-                sx={{
-                  p: 1,
-                  color: "white",
-                  px: 2,
-                  borderRadius: 100,
-                  fontFamily: "SupercellText Bold",
-                  background: "rgba(72,50,220,1)"
-                }}
-              >
-                PNG
-              </Box>
-            </Flex>
-            <Box mt={3}>
-              <Text
-                style={{
-                  color: "rgba(0,0,0,0.8)",
-                  fontFamily: "SupercellText",
-                  fontSize: 14
-                }}
-              >
-                Attribution
-              </Text>
-              <Flex mt={2} alignItems="center">
-                <img
-                  src={supercellLogo}
-                  style={{
-                    width: 25,
-                    marginRight: 8,
+          <Flex p={3} flex={1} flexDirection="column">
+            <Box flex={1}>
+              <Flex justifyContent="space-between" mb={3}>
+                <H1 style={{ fontSize: 20 }}>{activeObject.name}</H1>
+                <Box
+                  sx={{
+                    p: 1,
+                    color: "white",
+                    px: 2,
                     borderRadius: 100,
-                    cursor: "pointer"
+                    fontFamily: "SupercellText Bold",
+                    background: "rgba(72,50,220,1)"
                   }}
-                />
+                >
+                  PNG
+                </Box>
+              </Flex>
+              <Box mt={3}>
                 <Text
                   style={{
                     color: "rgba(0,0,0,0.8)",
-                    fontFamily: "SupercellText Medium"
+                    fontFamily: "SupercellText",
+                    fontSize: 14
                   }}
                 >
-                  Supercell
+                  Attribution
                 </Text>
-              </Flex>
-            </Box>
+                <Flex mt={2} alignItems="center">
+                  <img
+                    src={supercellLogo}
+                    style={{
+                      width: 25,
+                      marginRight: 8,
+                      borderRadius: 100,
+                      cursor: "pointer"
+                    }}
+                  />
+                  <Text
+                    style={{
+                      color: "rgba(0,0,0,0.8)",
+                      fontFamily: "SupercellText Medium"
+                    }}
+                  >
+                    Supercell
+                  </Text>
+                </Flex>
+              </Box>
 
-            <Box mt={3}>
-              <Text
-                style={{
-                  color: "rgba(0,0,0,0.8)",
-                  fontFamily: "SupercellText",
-                  fontSize: 14
-                }}
-              >
-                Size
-              </Text>
-              <Flex mt={2} alignItems="center">
+              <Box mt={3}>
                 <Text
                   style={{
                     color: "rgba(0,0,0,0.8)",
-                    fontFamily: "SupercellText Medium"
+                    fontFamily: "SupercellText",
+                    fontSize: 14
                   }}
                 >
-                  10mb
+                  Size
                 </Text>
-              </Flex>
-            </Box>
+                <Flex mt={2} alignItems="center">
+                  <Text
+                    style={{
+                      color: "rgba(0,0,0,0.8)",
+                      fontFamily: "SupercellText Medium"
+                    }}
+                  >
+                    10mb
+                  </Text>
+                </Flex>
+              </Box>
 
-            <Box mt={3}>
-              <Text
-                style={{
-                  color: "rgba(0,0,0,0.8)",
-                  fontFamily: "SupercellText",
-                  fontSize: 14
-                }}
-              >
-                Policy
-              </Text>
-              <Flex mt={2} alignItems="center">
+              <Box mt={3}>
                 <Text
                   style={{
                     color: "rgba(0,0,0,0.8)",
-                    fontFamily: "SupercellText Medium"
+                    fontFamily: "SupercellText",
+                    fontSize: 14
                   }}
                 >
-                  Free to use
+                  Policy
                 </Text>
-              </Flex>
+                <Flex mt={2} alignItems="center">
+                  <Text
+                    style={{
+                      color: "rgba(0,0,0,0.8)",
+                      fontFamily: "SupercellText Medium"
+                    }}
+                  >
+                    Free to use
+                  </Text>
+                </Flex>
+              </Box>
             </Box>
-          </Box>
+            <Flex>
+              {[faHeart, faFlag, faShare].map(icon => (
+                <Flex
+                  mr={3}
+                  flex={1}
+                  sx={{
+                    //width: 60,
+                    height: 55,
+                    border: "1px solid rgba(72,50,220,1)",
+                    borderRadius: 8
+                  }}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <FontAwesomeIcon
+                    size="lg"
+                    icon={icon}
+                    color="rgba(72,50,220,1)"
+                  />
+                </Flex>
+              ))}
+            </Flex>
+          </Flex>
           <Box p={3} style={{ borderTop: "1px solid #ddd" }}>
             <Box mb={3}>
               <GhostButton>Open Editor</GhostButton>

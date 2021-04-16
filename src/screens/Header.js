@@ -17,6 +17,7 @@ const Name = styled.div`
 
 const NavItem = styled.div`
   color: gray;
+  cursor: pointer;
   font-family: SupercellText Medium;
   margin-right: 24px;
   font-size: 16px;
