@@ -153,7 +153,7 @@ const Button = styled(Box)`
   border-radius: 8px;
 `;
 
-const Image = ({ asset, name, ...props }) => (
+export const Image = ({ asset, name, ...props }) => (
   <Container {...props}>
     <img src={asset.asset} style={{ width: "100%" }} />
     <Overlay className="overlay">
@@ -201,15 +201,49 @@ const Tag = ({ name, image }) => (
   </Flex>
 );
 
+const PrimaryButton = ({ children }) => (
+  <Flex
+    justifyContent="center"
+    sx={{
+      color: "white",
+      cursor: "pointer",
+      fontFamily: "SupercellText Bold",
+      p: 3,
+      background: "#4832DC",
+      borderRadius: 8
+    }}
+  >
+    {children}
+  </Flex>
+);
+
+const GhostButton = ({ children }) => (
+  <Flex
+    justifyContent="center"
+    sx={{
+      //color: "white",
+      border: "1px solid #4832DC",
+      cursor: "pointer",
+      fontFamily: "SupercellText Bold",
+      p: 3,
+      color: "#4832DC",
+      borderRadius: 8
+    }}
+  >
+    {children}
+  </Flex>
+);
+
 function Home() {
   const [activeImage, setActiveImage] = useState(null);
 
   if (activeImage) {
+    const activeObject = assets.find(a => a.asset === activeImage);
     if (activeImage === bea2) {
       return <BeaEditor setActiveImage={setActiveImage} />;
     }
     return (
-      <Box flex={1} style={{ position: "relative", overflow: "hidden" }}>
+      <Flex flex={1} style={{ position: "relative", overflow: "hidden" }}>
         <Flex
           onClick={() => setActiveImage(null)}
           style={{
@@ -238,7 +272,114 @@ function Home() {
             style={{ width: "100%", height: "100%", objectFit: "contain" }}
           />
         </Box>
-      </Box>
+        <Flex flexDirection="column" width={1 / 3}>
+          <Box p={3} flex={1}>
+            <Flex justifyContent="space-between" mb={3}>
+              <H1 style={{ fontSize: 20 }}>{activeObject.name}</H1>
+              <Box
+                sx={{
+                  p: 1,
+                  color: "white",
+                  px: 2,
+                  borderRadius: 100,
+                  fontFamily: "SupercellText Bold",
+                  background: "rgba(72,50,220,1)"
+                }}
+              >
+                PNG
+              </Box>
+            </Flex>
+            <Box mt={3}>
+              <Text
+                style={{
+                  color: "rgba(0,0,0,0.8)",
+                  fontFamily: "SupercellText",
+                  fontSize: 14
+                }}
+              >
+                Attribution
+              </Text>
+              <Flex mt={2} alignItems="center">
+                <img
+                  src={supercellLogo}
+                  style={{
+                    width: 25,
+                    marginRight: 8,
+                    borderRadius: 100,
+                    cursor: "pointer"
+                  }}
+                />
+                <Text
+                  style={{
+                    color: "rgba(0,0,0,0.8)",
+                    fontFamily: "SupercellText Medium"
+                  }}
+                >
+                  Supercell
+                </Text>
+              </Flex>
+            </Box>
+
+            <Box mt={3}>
+              <Text
+                style={{
+                  color: "rgba(0,0,0,0.8)",
+                  fontFamily: "SupercellText",
+                  fontSize: 14
+                }}
+              >
+                Size
+              </Text>
+              <Flex mt={2} alignItems="center">
+                <Text
+                  style={{
+                    color: "rgba(0,0,0,0.8)",
+                    fontFamily: "SupercellText Medium"
+                  }}
+                >
+                  10mb
+                </Text>
+              </Flex>
+            </Box>
+
+            <Box mt={3}>
+              <Text
+                style={{
+                  color: "rgba(0,0,0,0.8)",
+                  fontFamily: "SupercellText",
+                  fontSize: 14
+                }}
+              >
+                Policy
+              </Text>
+              <Flex mt={2} alignItems="center">
+                <Text
+                  style={{
+                    color: "rgba(0,0,0,0.8)",
+                    fontFamily: "SupercellText Medium"
+                  }}
+                >
+                  Free to use
+                </Text>
+              </Flex>
+            </Box>
+          </Box>
+          <Box p={3} style={{ borderTop: "1px solid #ddd" }}>
+            <Box mb={3}>
+              <GhostButton>Open Editor</GhostButton>
+            </Box>
+            <PrimaryButton>
+              <Box mr={2}>
+                <FontAwesomeIcon
+                  icon={faDownload}
+                  color="rgba(255,255,255,0.9)"
+                />
+              </Box>
+              Download
+            </PrimaryButton>
+          </Box>
+        </Flex>
+      </Flex>
     );
   }
 
