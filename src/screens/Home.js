@@ -15,99 +15,89 @@ import colt from "../assets/Colt-4.png";
 import emotes from "../assets/download.jpeg";
 import starforce from "../assets/36v08htum8d61.png";
 import mapbanners from "../assets/mapbanners.png";
+import { useQuery } from "graphql-hooks";
 
 const Grid = styled.div`
   width: 100%;
   display: grid;
-  margin-top: 24px;
-  grid-template-columns: 1fr 1fr 1fr;
-
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 24px;
 `;
 
-const data = [
-  { name: "Characters", asset: colt },
-  { name: "Pins", asset: giphy },
-  { name: "Backgrounds", asset: background },
-  { name: "Portraits", asset: giphy2 },
-  { name: "Game UI", asset: pass },
-  { name: "Latest", asset: starforce },
-  { name: "3D Models", asset: giphy3 },
-  { name: "Map Banners", asset: mapbanners }
-];
+const Frame = styled.div`
+  padding-bottom: 16px;
+  background: black;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+`;
 
-const GridBlock = ({ item, ...props }) => (
-  <Box
-    p={3}
-    style={{
-      position: "relative",
-      border: "1px solid #eee",
-      borderRadius: 10,
-      overflow: "hidden",
-      boxShadow: `0 1px 1px rgba(0,0,0,0.04),0 2px 2px rgba(0,0,0,0.04),0 4px 4px rgba(0,0,0,0.04),0 8px 8px rgba(0,0,0,0.04)`
-    }}
-    bg="white"
-    height="200px"
-    {...props}
-  >
-    <Box>
-      <img
-        style={{
-          position: "absolute",
-          zIndex: 0,
-          padding: 24,
-          top: 0,
-          right: 0,
-          left: 0,
-          bottom: 0,
-          height: "100%",
-          width: "100%",
-          maxWidth: 300,
-          margin: "auto",
-          objectFit: "contain",
-          ...(item.cover && {
-            objectFit: "cover",
-            maxWidth: null,
-            padding: 0
-          })
-        }}
-        src={item.asset}
-      />
-      <H2
-        style={{
-          position: "absolute",
-          top: 12,
-          left: 12,
-          zIndex: 10,
-          color: item.white ? "white" : "black"
-        }}
-      >
-        {item.name}
-      </H2>
-    </Box>
+const LOOT_QUERY = `query LootQuery {
+  getLoot {
+    id
+    name
+    imageUrl
+    currentPrice
+    owner
+    openSeaUrl
+    ownerUrl
+  }
+}`;
+
+const NFT = ({ asset }) => (
+  <Box>
+    <a href={asset.openSeaUrl} style={{ textDecoration: "none" }}>
+      <Frame>
+        <Flex p={3}>
+          <H2>{asset.name}</H2>
+        </Flex>
+        <Box px={"9px"}>
+          <img src={asset.imageUrl} />
+        </Box>
+        <Flex px={3} justifyContent="space-between">
+          <Flex alignItems="center">
+            <Box mr={2}>
+              <img
+                src={asset.ownerUrl}
+                style={{ width: 25, height: 25, borderRadius: "50%" }}
+              />
+            </Box>
+            {asset.owner && (
+              <H2 style={{ color: "white", fontSize: 14 }}>@{asset.owner}</H2>
+            )}
+          </Flex>
+          <H2>{asset.currentPrice} eth</H2>
+        </Flex>
+      </Frame>
+    </a>
   </Box>
 );
 
 function Home() {
+  const { loading, error, data } = useQuery(LOOT_QUERY);
+
   const history = useHistory();
   return (
     <Box p={3} flex={1}>
-      <Box
-        p={3}
-        pb={6}
-        m={-3}
-        mb={-6}
-        style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover" }}
-      >
-        <H1 style={{ color: "white" }}>Content Library</H1>
-        <Box width={1} mt={3}>
-          <BigInput placeholder="Search for assets by name, type, or tag" />
-        </Box>
+      <Box mb={4}>
+        <BigInput />
       </Box>
+      <Flex mt={3}>
+        <Box mr={3}>
+          <H2 mb={3}>
+            <span style={{ color: "rgba(255,255,255, 0.9)" }}>Total:</span>{" "}
+            {data && data.getLoot.length}
+          </H2>
+        </Box>
+        <H2 mb={3}>
+          {" "}
+          <span style={{ color: "rgba(255,255,255, 0.9)" }}>Floor:</span> 8.3
+          eth
+        </H2>
+      </Flex>
+
       <Grid>
-        {data.map(item => (
-          <GridBlock item={item} onClick={() => history.push("/characters")} />
-        ))}
+        {!loading &&
+          data &&
+          data.getLoot.map(loot => <NFT key={loot.name} asset={loot} />)}
       </Grid>
     </Box>
   );

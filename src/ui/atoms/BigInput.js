@@ -6,20 +6,22 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Input = styled.input`
   width: 100%;
-  padding: 14px 16px;
-  padding-left: 48px;
+  padding: 14px 10px;
+  padding-left: 46px;
   border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
   font-size: 14px;
-  font-family: SupercellText;
-  border-radius: 100px;
+  background: black;
+  color: white;
+  font-family: Helvetica;
+  border-radius: 5px;
 `;
 
 const BigInput = props => {
   return (
     <Box style={{ position: "relative" }}>
-      <Box style={{ position: "absolute", left: 20, top: 15 }}>
-        <FontAwesomeIcon icon={faSearch} color="rgba(0,0,0,0.7)" />
+      <Box style={{ position: "absolute", left: 15, top: 15 }}>
+        <FontAwesomeIcon icon={faSearch} color="rgba(255,255,255,0.9)" />
       </Box>
       <Input {...props} />
     </Box>
