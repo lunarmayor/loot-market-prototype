@@ -5,10 +5,10 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Box, Flex } from "../ui/layouts";
 import { useHistory } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { H1, H2, P, BigInput } from "../ui/atoms";
+import { H1, H2, P, BigInput, Button } from "../ui/atoms";
 import { useQuery } from "graphql-hooks";
 import moralis from "../morialis";
-import { FaUpload } from "react-icons/fa";
+import { FaUpload, FaMix, FaAdjust } from "react-icons/fa";
 import useCurrentUser from "../hooks/currentUser";
 import Header from "./Header";
 
@@ -82,43 +82,47 @@ const NFT = ({ image, name }) => {
 };
 
 function Home() {
-  let currentUser = useCurrentUser();
-  console.log(currentUser);
-
-  let [nfts, setNfts] = useState([]);
-  useEffect(() => {
-    getNFTs();
-  }, [false]);
-
-  const getNFTs = async () => {
-    fetch(
-      `https://api.opensea.io/api/v1/assets?owner=${currentUser.ethAddress}&limit=50&offset=0`
-    )
-      .then(res => res.json())
-      .then(results => {
-        setNfts(results.assets);
-      });
-  };
-
-  const history = useHistory();
   return (
-    <Flex flexDirection="column" flex={1}>
-      <Header />
+    <Flex flexDirection="column" overflow="hidden" flex={1}>
+      <Header border />
 
-      <Box p={3} bg="#fbfbfb" flex={1}>
-        {false && (
-          <Box mb={3}>
-            {" "}
-            <DropZone />
+      <Flex bg="#fbfbfb" bg="#E5E5E5" flex={1}>
+        <Box p={3} flex={1}>
+          <img
+            style={{
+              height: "100%",
+              width: "100%",
+              objectFit: "contain"
+            }}
+            src="https://lh3.googleusercontent.com/xeUZP17cF_xlZo9Hqv6is49JxJt42awjRDGGs6wVBNzAnpIJgm0amIiiupPezzaewi81KGb3mSM2R74dtf5NXkwvrAfkUTwp5_MWaEQ"
+          />
+        </Box>
+        <Flex width={300} bg="white" bg="#fbfbfb" flexDirection="column">
+          <Flex p={3} bg="white" style={{ borderBottom: "1px solid #dedede" }}>
+            <FaAdjust color="#5968fe" size={20} />
+            <H2 ml={2}>Filters</H2>
+          </Flex>
+          <Box flex={1} overflow="auto">
+            {[0, 1, 2, 3, 4, 5, 6].map(i => (
+              <Flex p={3}>
+                <Box>
+                  <img
+                    src="https://gradientjoy.com/200"
+                    style={{ width: 30, height: 20, borderRadius: "50%" }}
+                  />
+                </Box>
+                <P>Filter 1</P>
+              </Flex>
+            ))}
           </Box>
-        )}
-        <Grid>
-          <DropZone />
-          {nfts.map((nft, i) => (
-            <NFT key={i} image={nft.image_url} name={nft.name} />
-          ))}
-        </Grid>
-      </Box>
+          <Box p={3} style={{ borderTop: "1px solid #dedede" }}>
+            <Box mb={3}>
+              <Button>Download</Button>
+            </Box>
+            <Button dark>Mint as NFT</Button>
+          </Box>
+        </Flex>
+      </Flex>
     </Flex>
   );
 }

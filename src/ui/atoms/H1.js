@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
-import { spacing } from "styled-system";
+import { space } from "styled-system";
 
 const H1 = styled.h1`
   margin: 0;
-  font-size: 24px;
-  color: white;
-  font-family: Helvetica;
+  font-size: 40px;
+  color: #29272a;
+  font-family: Source Code Pro;
+  ${space}
 `;
 
 export default H1;

@@ -1,71 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { Flex, Box } from "../ui/layouts";
-import { BigInput } from "../ui/atoms";
-import logo from "../assets/kitlogo.svg";
-import avatar from "../assets/avatar.jpg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import brawlstars from "../assets/brawlstarz.png";
-import { useLocation, useHistory } from "react-router-dom";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { Box, Flex } from "../ui/layouts";
+import logo from "../assets/logo.png";
+import { H1, H2, P, BigInput } from "../ui/atoms";
+import useCurrentUser from "../hooks/currentUser";
 
-const NavItem = styled.div`
+const AccountContainer = styled.div`
+  background: #5a67fe;
+  padding: 12px 24px;
+  border-radius: 50px;
   color: white;
-  cursor: pointer;
-  font-family: SupercellText Medium;
-  margin-right: 24px;
-  font-size: 16px;
-
-  ${p =>
-    p.active &&
-    `
-    color: #4832DC;
-    `}
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
-export const Text = styled(NavItem)`
-  font-size: 14px;
-  margin-right: 0;
-`;
-
-let pathToNav = {
-  "/": "Home",
-  "/characters": "Characters"
-};
-
-let navToPath = {
-  Home: "/",
-  Characters: "/characters"
-};
-
-const Logo = styled.div`
-  color: white;
-  font-size: 24px;
-  font-family: serif;
-`;
-
-const Header = ({ activeSawbnav }) => {
-  const location = useLocation();
-  const history = useHistory();
-  const { pathname } = location;
-
-  const activeSubnav = pathToNav[pathname];
+const Account = () => {
+  const currentUser = useCurrentUser();
 
   return (
-    <Box
-      bg="black"
-      style={{
-        borderBottom: "1px solid rgba(255,255,255,0.1)",
-        position: "sticky",
-        top: 0,
-        zIndex: 1000
-      }}
-    >
-      <Flex alignItems="center" bg="black" p={3}>
-        <Logo>Loot Marketplace</Logo>
-      </Flex>
+    <Box>
+      <AccountContainer>{currentUser.name}</AccountContainer>
     </Box>
   );
 };
+
+function Header({ border }) {
+  return (
+    <Flex
+      p={3}
+      justifyContent="space-between"
+      bg="white"
+      alignItems="center"
+      style={{ borderBottom: (border ? 1 : 0) + "px solid #dedede" }}
+    >
+      <Flex alignItems="center">
+        <Box mr={2}>
+          <img
+            style={{
+              width: 30,
+              border: "2px solid white",
+              display: "block",
+              borderRadius: "50%"
+            }}
+            src={logo}
+          />
+        </Box>
+        <H1 style={{ fontSize: 18 }}>Art Machine</H1>
+      </Flex>
+      <Account />
+    </Flex>
+  );
+}
 
 export default Header;

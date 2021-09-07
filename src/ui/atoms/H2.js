@@ -2,10 +2,10 @@ import styled from "@emotion/styled";
 import { space } from "styled-system";
 
 const H2 = styled.h2`
-  color: rgb(204, 252, 255);
-  font-family: Helvetica;
+  color: #29272a;
+  font-family: Source Code Pro;
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
   ${space}
 `;
 
