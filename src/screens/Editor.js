@@ -4,12 +4,14 @@ import { ThemeProvider } from "@emotion/react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Box, Flex } from "../ui/layouts";
 import { useHistory } from "react-router-dom";
+import gradient from "random-gradient";
 import logo from "../assets/logo.png";
 import { H1, H2, P, BigInput, Button } from "../ui/atoms";
 import { useQuery } from "graphql-hooks";
 import moralis from "../morialis";
 import { FaUpload, FaMix, FaAdjust } from "react-icons/fa";
 import useCurrentUser from "../hooks/currentUser";
+import thang from "../assets/art.png";
 import Header from "./Header";
 
 const DropContainer = styled.div`
@@ -82,6 +84,7 @@ const NFT = ({ image, name }) => {
 };
 
 function Home() {
+  window.m = moralis;
   return (
     <Flex flexDirection="column" overflow="hidden" flex={1}>
       <Header border />
@@ -94,7 +97,7 @@ function Home() {
               width: "100%",
               objectFit: "contain"
             }}
-            src="https://lh3.googleusercontent.com/xeUZP17cF_xlZo9Hqv6is49JxJt42awjRDGGs6wVBNzAnpIJgm0amIiiupPezzaewi81KGb3mSM2R74dtf5NXkwvrAfkUTwp5_MWaEQ"
+            src={thang}
           />
         </Box>
         <Flex width={300} bg="white" bg="#fbfbfb" flexDirection="column">
@@ -104,14 +107,18 @@ function Home() {
           </Flex>
           <Box flex={1} overflow="auto">
             {[0, 1, 2, 3, 4, 5, 6].map(i => (
-              <Flex p={3}>
+              <Flex p={3} alignItems="center">
                 <Box>
-                  <img
-                    src="https://gradientjoy.com/200"
-                    style={{ width: 30, height: 20, borderRadius: "50%" }}
+                  <div
+                    style={{
+                      width: 30,
+                      height: 30,
+                      borderRadius: "50%",
+                      background: gradient((i + 1 + Math.random()).toString())
+                    }}
                   />
                 </Box>
-                <P>Filter 1</P>
+                <P ml={3}>Filter {i + 1}</P>
               </Flex>
             ))}
           </Box>

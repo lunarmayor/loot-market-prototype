@@ -5,11 +5,6 @@ import { currentUser as currentUserAtom } from "../atoms";
 import ENS, { getEnsAddress } from "@ensdomains/ensjs";
 import moralis from "../morialis";
 
-const ens = new ENS({
-  provider: moralis.getWeb3Provider(),
-  ensAddress: getEnsAddress("1")
-});
-
 const format = user => {
   return user
     ? {
