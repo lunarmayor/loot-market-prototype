@@ -12,6 +12,7 @@ import useCurrentUser from "../hooks/currentUser";
 import { Surface } from "gl-react-dom";
 import { currentUser as currentUserAtom } from "../atoms";
 import { useRecoilState } from "recoil";
+import ethers from "../ethers";
 
 import { keyframes } from "@emotion/react";
 const rotate = keyframes`
@@ -47,6 +48,7 @@ varying vec2 uv;
 uniform float blue;
 void main() {
   gl_FragColor = vec4(uv.x, uv.y, blue, 1.0);
+
 }`
   }
 });
@@ -58,12 +60,11 @@ const Rotater = styled.div`
 function Home() {
   const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
 
-  const loginWithWalletConnect = () => {
-    moralis.Web3.authenticate({ provider: "walletconnect" })
-      .then(function(user) {
-        setCurrentUser(moralis.User.current());
-      })
-      .catch(console.log);
+  const loginWithWalletConnect = async () => {
+    console.log(ethers);
+    await ethers.logIn();
+
+    console.log(ethers);
   };
 
   const loginWithMetaMask = () => {

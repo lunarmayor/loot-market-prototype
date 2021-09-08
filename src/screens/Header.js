@@ -13,10 +13,10 @@ import moralis from "../morialis";
 const AccountContainer = styled.div`
   background: #5a67fe;
   padding: 12px 24px;
-  padding-right: 42px;
+  padding-right: 48px;
   border-radius: 50px;
   color: white;
-  max-width: 200px;
+  max-width: 240px;
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: Source code Pro;
@@ -28,7 +28,9 @@ const Account = () => {
 
   useEffect(() => {
     const getName = async () => {
+      return false;
       let provider = await moralis.Web3.activeWeb3Provider.activate();
+
       const ens = new ENS({
         provider,
         ensAddress: getEnsAddress("1")

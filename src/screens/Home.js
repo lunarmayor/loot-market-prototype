@@ -92,7 +92,7 @@ function Home() {
 
   const getNFTs = async () => {
     fetch(
-      `https://api.opensea.io/api/v1/assets?owner=${currentUser.ethAddress}&limit=50&offset=0`
+      `https://api.opensea.io/api/v1/assets?owner=${currentUser.address}&limit=50&offset=0`
     )
       .then(res => res.json())
       .then(results => {

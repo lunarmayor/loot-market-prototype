@@ -16,6 +16,7 @@ import Login from "./screens/Login";
 import AuthContainer from "./AuthContainer";
 import { RecoilRoot, atom, useRecoilState } from "recoil";
 import { currentUser as currentUserAtom } from "./atoms";
+import eth from "./ethers";
 
 const theme = {
   colors: {

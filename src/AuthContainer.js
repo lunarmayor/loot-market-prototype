@@ -5,11 +5,13 @@ import bg from "./assets/Rectangle.png";
 import background from "./assets/bgs.png";
 import { GraphQLClient, ClientContext } from "graphql-hooks";
 import { H1, H2, BigInput } from "./ui/atoms";
+import { Box } from "./ui/layouts";
 import Header from "./screens/Header";
 import Home from "./screens/Home";
 import moralis from "./morialis";
 import Login from "./screens/Login";
 import Editor from "./screens/Editor";
+import eth from "./ethers";
 
 import { atom, useRecoilState } from "recoil";
 import { currentUser as currentUserAtom } from "./atoms";
@@ -17,9 +19,24 @@ import { currentUser as currentUserAtom } from "./atoms";
 function AuthContainer() {
   const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
 
+  let [loaded, setLoaded] = useState(false);
   useEffect(() => {
-    setCurrentUser(moralis.User.current());
-  }, [false]);
+    const connect = async () => {
+      await eth.connect();
+      setCurrentUser(eth.user);
+      setLoaded(true);
+    };
+
+    connect();
+  }, []);
+
+  useEffect(() => {
+    //setCurrentUser(moralis.User.current());
+  }, []);
+
+  if (!loaded) {
+    return <Box />;
+  }
 
   return currentUser ? (
     <Switch>

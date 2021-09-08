@@ -12,6 +12,7 @@ import moralis from "../morialis";
 import { FaUpload, FaMix, FaAdjust } from "react-icons/fa";
 import useCurrentUser from "../hooks/currentUser";
 import thang from "../assets/art.png";
+import oplogo from "../assets/oplogo.png";
 import Header from "./Header";
 
 const DropContainer = styled.div`
@@ -89,7 +90,7 @@ function Home() {
     <Flex flexDirection="column" overflow="hidden" flex={1}>
       <Header border />
 
-      <Flex bg="#fbfbfb" bg="#E5E5E5" flex={1}>
+      <Flex bg="#fbfbfb" bg="#E5E5E5" flex={1} overflow="hidden">
         <Box p={3} flex={1}>
           <img
             style={{
@@ -101,26 +102,59 @@ function Home() {
           />
         </Box>
         <Flex width={300} bg="white" bg="#fbfbfb" flexDirection="column">
-          <Flex p={3} bg="white" style={{ borderBottom: "1px solid #dedede" }}>
-            <FaAdjust color="#5968fe" size={20} />
-            <H2 ml={2}>Filters</H2>
-          </Flex>
           <Box flex={1} overflow="auto">
-            {[0, 1, 2, 3, 4, 5, 6].map(i => (
-              <Flex p={3} alignItems="center">
-                <Box>
-                  <div
-                    style={{
-                      width: 30,
-                      height: 30,
-                      borderRadius: "50%",
-                      background: gradient((i + 1 + Math.random()).toString())
-                    }}
-                  />
-                </Box>
-                <P ml={3}>Filter {i + 1}</P>
-              </Flex>
-            ))}
+            <Flex
+              p={3}
+              bg="white"
+              style={{ borderBottom: "1px solid #dedede" }}
+            >
+              <Box>
+                <img src={oplogo} width="20px" />
+              </Box>
+              <H2 ml={2}>Open Palatte</H2>
+            </Flex>
+            <Box style={{ borderBottom: "1px solid #dedede" }}>
+              {[0, 1, 2, 3, 4].map(i => (
+                <Flex p={3} alignItems="center">
+                  <Box>
+                    <div
+                      style={{
+                        width: 30,
+                        height: 30,
+                        borderRadius: "50%",
+                        background: gradient((i + 1 + Math.random()).toString())
+                      }}
+                    />
+                  </Box>
+                  <P ml={3}>Filter {i + 1}</P>
+                </Flex>
+              ))}
+            </Box>
+            <Flex
+              p={3}
+              bg="white"
+              style={{ borderBottom: "1px solid #dedede" }}
+            >
+              <FaAdjust color="#5968fe" size={20} />
+              <H2 ml={2}>Filters</H2>
+            </Flex>
+            <Box flex={1}>
+              {[0, 1, 2, 3, 4, 5, 6].map(i => (
+                <Flex p={3} alignItems="center">
+                  <Box>
+                    <div
+                      style={{
+                        width: 30,
+                        height: 30,
+                        borderRadius: "50%",
+                        background: gradient((i + 1 + Math.random()).toString())
+                      }}
+                    />
+                  </Box>
+                  <P ml={3}>Filter {i + 1}</P>
+                </Flex>
+              ))}
+            </Box>
           </Box>
           <Box p={3} style={{ borderTop: "1px solid #dedede" }}>
             <Box mb={3}>
