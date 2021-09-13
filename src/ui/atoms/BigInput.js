@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Input = styled.input`
-  width: 100%;
+  width: 350px;
   padding: 14px 10px;
   padding-left: 46px;
   border-width: 1px;
@@ -13,8 +13,10 @@ const Input = styled.input`
   font-size: 14px;
   background: black;
   color: white;
-  font-family: Helvetica;
-  border-radius: 5px;
+  outline: none;
+  font-family: Source Code Pro;
+  font-weight: 400;
+  border-radius: 10px;
 `;
 
 const BigInput = props => {

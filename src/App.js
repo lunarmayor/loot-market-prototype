@@ -25,7 +25,7 @@ const theme = {
 };
 
 const client = new GraphQLClient({
-  url: "http://localhost:4000/graphql"
+  url: "https://api.studio.thegraph.com/query/8490/loot-market-lunar/0.0.2"
 });
 
 const format = user => {

@@ -4,8 +4,8 @@ const Button = styled.button`
   padding: 12px 24px;
   border: none;
   border-radius: 8px;
-  background: white;
-  color: #5a67fe;
+  background: #333;
+  color: white;
   font-family: Source Code Pro;
   font-size: 18px;
   width: 100%;

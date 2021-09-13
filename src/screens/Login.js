@@ -63,17 +63,10 @@ function Home() {
   const loginWithWalletConnect = async () => {
     console.log(ethers);
     await ethers.logIn();
-
-    console.log(ethers);
+    setCurrentUser(ethers.user);
   };
 
-  const loginWithMetaMask = () => {
-    moralis.Web3.authenticate()
-      .then(function(user) {
-        setCurrentUser(moralis.User.current());
-      })
-      .catch(console.log);
-  };
+  const loginWithMetaMask = () => {};
 
   return (
     <Box p={3} flex={1}>
@@ -84,26 +77,16 @@ function Home() {
         alignItems="center"
         flexDirection="column"
       >
-        <Box mb={"50px"} style={{ zIndex: 1 }}>
-          <Rotater>
-            <img style={{ width: 250, zIndex: 1 }} src={logo} />
-          </Rotater>
-        </Box>
-        <H1 mb={2}>Art Machine</H1>
-        <P>Remix your NFTs to create more NFTs</P>
+        <H1 style={{ fontSize: 50, fontFamily: "serif" }} mb={2}>
+          Loot
+        </H1>
+        <P style={{ maxWidth: 400, fontWeight: 400, textAlign: "center" }}>
+          Loot is randomized adventurer gear generated and stored on chain.
+          Stats, images, and other functionality are intentionally omitted for
+          others to interpret. Feel free to use Loot in any way you want.
+        </P>
 
         <Box mt={5}>
-          <Box mb={3}>
-            <Button onClick={loginWithMetaMask}>
-              <Flex justifyContent="center" alignItems="center">
-                <img style={{ width: 30 }} src={metamask} />
-                <Box flex={1} ml={3}>
-                  MetaMask
-                </Box>
-              </Flex>
-            </Button>
-          </Box>
-
           <Button onClick={loginWithWalletConnect}>
             <Flex justifyContent="center" alignItems="center">
               <img style={{ width: 30 }} src={walletconnect} />

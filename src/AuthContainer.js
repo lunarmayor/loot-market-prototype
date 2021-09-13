@@ -10,7 +10,8 @@ import Header from "./screens/Header";
 import Home from "./screens/Home";
 import moralis from "./morialis";
 import Login from "./screens/Login";
-import Editor from "./screens/Editor";
+import BagScreen from "./screens/BagScreen";
+import User from "./screens/User";
 import eth from "./ethers";
 
 import { atom, useRecoilState } from "recoil";
@@ -23,15 +24,12 @@ function AuthContainer() {
   useEffect(() => {
     const connect = async () => {
       await eth.connect();
+      console.log(eth.user);
       setCurrentUser(eth.user);
       setLoaded(true);
     };
 
     connect();
-  }, []);
-
-  useEffect(() => {
-    //setCurrentUser(moralis.User.current());
   }, []);
 
   if (!loaded) {
@@ -41,7 +39,8 @@ function AuthContainer() {
   return currentUser ? (
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path="/editor" exact component={Editor} />
+      <Route path="/bag/:id" exact component={BagScreen} />
+      <Route path="/adventurer/:id" exact component={User} />
     </Switch>
   ) : (
     <Login />

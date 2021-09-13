@@ -7699,6 +7699,14 @@ has@^1.0.0, has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hash-avatar@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/hash-avatar/-/hash-avatar-0.0.2.tgz#b7617edbed7d255dc45eb57730eb948ba748a468"
+  integrity sha512-g7gJ+ZWY4KTEe/Y37qaleqwcQQgxYZSq6Tubyc8gg8qG2Ot5pcoZKUJGEoCLoT65oFNgP3pBsZionB35+aodNQ==
+  dependencies:
+    string-hash "^1.1.3"
+    tinycolor2 "^1.4.1"
+
 hash-base@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/hash-base/-/hash-base-3.1.0.tgz#55c381d9e06e1d2997a883b4a3fddfe7f0d3af33"
@@ -12130,6 +12138,15 @@ react-error-overlay@^6.0.9:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
 
+react-hash-avatar@1.0.0-beta.0:
+  version "1.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/react-hash-avatar/-/react-hash-avatar-1.0.0-beta.0.tgz#e4b30a56b9c5c16385242dc67e8c7929bc12417f"
+  integrity sha512-QJxhRzX5ZCgbTsIg4A76mKNvRkxAItgsWnIQVaYQ3eOjkdV0Y3/7AQKT6Z76q3waw0f/Z8PMWgcIsim1cVVLKA==
+  dependencies:
+    prop-types "^15.7.2"
+    string-hash "^1.1.3"
+    tinycolor2 "^1.4.1"
+
 react-icons@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.2.0.tgz#6dda80c8a8f338ff96a1851424d63083282630d0"
@@ -14514,6 +14531,11 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+use-debounce@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-7.0.0.tgz#00a67d23d4fe09905e11145a99278da06c01c880"
+  integrity sha512-4fvxEEs7ztdNMh+c497HAgysdq2+Ascem6EaDANGlCIap1JzqfL03Xw8xkYc2lShfXm4uO6PA6V5zcXN7gJdFA==
 
 use-immer@^0.5.1:
   version "0.5.2"
