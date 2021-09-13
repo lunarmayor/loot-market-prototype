@@ -185,7 +185,7 @@ function Header({ border }) {
               borderBottomRightRadius: results.length ? 0 : 10,
               borderBottomLeftRadius: results.length ? 0 : 10
             }}
-            placeholder="Search by bag #, item, or owner"
+            placeholder="Search by bag #, address, or ens"
             value={query}
             onChange={e => setQuery(e.target.value)}
             onKeyDown={e => {
