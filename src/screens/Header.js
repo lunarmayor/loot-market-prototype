@@ -4,6 +4,7 @@ import { Box, Flex } from "../ui/layouts";
 import logo from "../assets/logo.png";
 import lunar from "../assets/lunar3.png";
 import { H1, H2, P, BigInput } from "../ui/atoms";
+import { useHistory } from "react-router-dom";
 import useCurrentUser from "../hooks/currentUser";
 import { useDebounce } from "use-debounce";
 import { useRecoilCallback } from "recoil";
@@ -120,6 +121,7 @@ const NavItem = styled(P)`
 function Header({ border }) {
   const [query, setQuery] = useState("");
   const [debouncedQuery] = useDebounce(query, 300);
+  const history = useHistory();
 
   const [results, setResults] = useState([]);
   const currentUser = useCurrentUser();
@@ -186,6 +188,22 @@ function Header({ border }) {
             placeholder="Search by bag #, item, or owner"
             value={query}
             onChange={e => setQuery(e.target.value)}
+            onKeyDown={e => {
+              if (e.charCode == 0) {
+                let result = results[0];
+
+                if (result) {
+                  history.push(
+                    `/${result.type === "bag" ? "bag" : "adventurer"}/${
+                      result.id
+                    }`
+                  );
+
+                  setResults([]);
+                  setQuery("");
+                }
+              }
+            }}
           />
           <SearchResults
             results={results}
