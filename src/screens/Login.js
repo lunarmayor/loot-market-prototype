@@ -61,7 +61,6 @@ function Home() {
   const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
 
   const loginWithWalletConnect = async () => {
-    console.log(ethers);
     await ethers.logIn();
     setCurrentUser(ethers.user);
   };

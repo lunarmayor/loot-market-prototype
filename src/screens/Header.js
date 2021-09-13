@@ -189,7 +189,7 @@ function Header({ border }) {
             value={query}
             onChange={e => setQuery(e.target.value)}
             onKeyDown={e => {
-              if (e.charCode == 0) {
+              if (e.keyCode === 0) {
                 let result = results[0];
 
                 if (result) {
