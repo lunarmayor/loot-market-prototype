@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { ThemeProvider } from "@emotion/react";
+import moment from "moment";
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,6 +27,7 @@ import { Owner } from "../ui/molecules";
 import ether from "../assets/ether.png";
 import { bag as bagAtom } from "../atoms";
 import { useRecoilState } from "recoil";
+import { shortenAddress } from "../utils";
 
 const Grid = styled.div`
   width: 100%;
@@ -111,6 +113,18 @@ const BAG_QUERY = `query BagQuery($id: ID!) {
       bagsHeld
     }
   }
+
+  transfers(where: { bag: $id }) {
+    from{
+   address
+  }
+  to {
+    address
+ }
+  timestamp
+  txHash
+
+  }
 }`;
 
 const NFT = ({ bag, lens }) => {
@@ -190,7 +204,7 @@ function Home({ route }) {
     <Box flex={1} flexDirection="column" bg="black">
       <Header />
 
-      <Box p={3} pt={1}>
+      <Box p={3} pt={[1, 1, 1, 3]} maxWidth={"1300px"} margin="auto">
         <Flex
           onClick={() => history.goBack()}
           mb={3}
@@ -204,10 +218,22 @@ function Home({ route }) {
         </Flex>
         {bag && (
           <Flex flexWrap="wrap">
-            <Box width={[1, 1 / 2, 1 / 2]} mr={[0, 4, 4]} mb={[4, 0, 0]}>
+            <Box
+              maxWidth={"650px"}
+              width={[1, 1 / 2, 1 / 2, 6 / 12]}
+              mr={[0, 4, 4]}
+              mb={[3, 0, 0]}
+            >
               <NFT bag={bag} lens="characters" />
             </Box>
-            <Box>
+            <Box
+              flex={1}
+              p={[3, 3, 4]}
+              style={{
+                borderRadius: 10,
+                border: "2px solid rgba(255, 255, 255, 0.1)"
+              }}
+            >
               <Heading mb={2}>{bag.name}</Heading>
               <Link
                 to={`/adventurer/${bag.currentOwner.address}`}
@@ -236,6 +262,44 @@ function Home({ route }) {
               ))}
             </Box>
           </Flex>
+        )}
+
+        {data && data.transfers && (
+          <Box mt={4} mb={5} style={{}}>
+            <H2 fontSize={22} mb={3} color="white">
+              Transfers
+            </H2>
+            <table style={{ borderCollapse: "collapse", width: "100%" }}>
+              <tr
+                style={{ borderBottom: "2px solid rgba(255, 255, 255, 0.1)" }}
+              >
+                <th>
+                  <P color="white">From</P>
+                </th>
+                <th>
+                  <P color="white">To</P>
+                </th>
+                <th>
+                  <P color="white">Date</P>
+                </th>
+              </tr>
+              {data.transfers.map(transfer => {
+                return (
+                  <tr>
+                    <td>
+                      <P>{shortenAddress(transfer.from.address)}</P>
+                    </td>
+                    <td>
+                      <P>{shortenAddress(transfer.to.address)}</P>
+                    </td>
+                    <td>
+                      <P>{moment.unix(transfer.timestamp).fromNow()}</P>
+                    </td>
+                  </tr>
+                );
+              })}
+            </table>
+          </Box>
         )}
       </Box>
     </Box>

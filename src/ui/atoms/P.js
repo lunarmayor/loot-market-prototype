@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { space, color } from "styled-system";
+import { space, color, typography } from "styled-system";
 
 const P = styled.p`
   color: rgba(255, 255, 255, 0.8);
@@ -9,6 +9,7 @@ const P = styled.p`
   font-size: 18px;
   ${color}
   ${space}
+  ${typography}
 `;
 
 export default P;

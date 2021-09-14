@@ -11,12 +11,22 @@ const Input = styled.input`
   border-width: 1px;
   border-color: rgba(255, 255, 255, 0.2);
   font-size: 14px;
-  background: black;
+  background: #0f0f0f;
   color: white;
   outline: none;
   font-family: Source Code Pro;
   font-weight: 400;
   border-radius: 10px;
+
+  transition: 300ms background ease-in-out;
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
 `;
 
 const BigInput = props => {
