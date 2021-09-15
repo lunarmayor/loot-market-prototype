@@ -10,11 +10,20 @@ import { useDebounce } from "use-debounce";
 import { useRecoilCallback } from "recoil";
 import { Link } from "react-router-dom";
 import ReactHashAvatar from "react-hash-avatar";
+import { FaHamburger } from "react-icons/fa";
 import { ethers } from "ethers";
 import eth from "../ethers";
 import { shortenAddress } from "../utils";
+import items from "../data/itemToPositionMap.json";
+import Fuse from "fuse.js";
 
 import ENS, { getEnsAddress } from "@ensdomains/ensjs";
+
+const options = {
+  includeScore: true
+};
+
+const fuse = new Fuse(Object.keys(items), options);
 
 const AccountContainer = styled.div`
   background: #333333;
@@ -93,12 +102,18 @@ const SearchResults = ({ results, handleSelection }) => {
     return false;
   }
 
+  const routeMap = {
+    bag: "bag",
+    wallet: "adventurer",
+    item: "item"
+  };
+
   return (
     <SearchContainer>
-      {results.map(result => {
+      {results.slice(0, 8).map(result => {
         return (
           <Link
-            to={`/${result.type == "bag" ? "bag" : "adventurer"}/${result.id}`}
+            to={`/${routeMap[result.type]}/${result.id}`}
             onClick={handleSelection}
             style={{ textDecoration: "none" }}
           >
@@ -111,6 +126,8 @@ const SearchResults = ({ results, handleSelection }) => {
     </SearchContainer>
   );
 };
+
+const Drawer = () => {};
 
 const NavItem = styled(P)`
   color: rgba(255, 255, 255, 0.8);
@@ -156,6 +173,17 @@ function Header({ border }) {
         ]);
       }
     }
+
+    const results = fuse.search(debouncedQuery);
+    console.log(results);
+
+    return setResults(
+      results.map(result => ({
+        type: "item",
+        label: result.item,
+        id: result.refIndex
+      }))
+    );
 
     setResults([]);
   };

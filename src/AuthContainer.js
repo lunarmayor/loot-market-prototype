@@ -12,6 +12,7 @@ import moralis from "./morialis";
 import Login from "./screens/Login";
 import BagScreen from "./screens/BagScreen";
 import User from "./screens/User";
+import Item from "./screens/Item";
 import eth from "./ethers";
 
 import { atom, useRecoilState } from "recoil";
@@ -41,6 +42,7 @@ function AuthContainer() {
       <Route path="/" exact component={Home} />
       <Route path="/bag/:id" exact component={BagScreen} />
       <Route path="/adventurer/:id" exact component={User} />
+      <Route path="/item/:id" exact component={Item} />
     </Switch>
   ) : (
     <Login />
