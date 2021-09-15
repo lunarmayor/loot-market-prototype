@@ -105,9 +105,9 @@ function User() {
   const { id } = useParams();
 
   const ITEM_BAGS_QUERY = `{
-    bags(where: { ${Object.values(itemToPositionMap)[id]}: "${
-    Object.keys(itemToPositionMap)[id]
-  }" }) {
+    bags(where: { ${Object.values(itemToPositionMap)[id]}: "${Object.keys(
+    itemToPositionMap
+  )[id].replace(/"/g, '\\"')}" }) {
       id
       chest
       foot

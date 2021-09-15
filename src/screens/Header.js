@@ -97,16 +97,16 @@ const ItemWrapper = styled(Box)`
   }
 `;
 
+const routeMap = {
+  bag: "bag",
+  address: "adventurer",
+  item: "item"
+};
+
 const SearchResults = ({ results, handleSelection }) => {
   if (results.length === 0) {
     return false;
   }
-
-  const routeMap = {
-    bag: "bag",
-    address: "adventurer",
-    item: "item"
-  };
 
   return (
     <SearchContainer>
@@ -217,15 +217,12 @@ function Header({ border }) {
             value={query}
             onChange={e => setQuery(e.target.value)}
             onKeyDown={e => {
-              if (e.keyCode === 0) {
+              console.log(e.keyCode);
+              if (e.keyCode === 13) {
                 let result = results[0];
 
                 if (result) {
-                  history.push(
-                    `/${result.type === "bag" ? "bag" : "adventurer"}/${
-                      result.id
-                    }`
-                  );
+                  history.push(`/${routeMap[result.type]}/${result.id}`);
 
                   setResults([]);
                   setQuery("");
