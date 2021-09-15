@@ -104,7 +104,7 @@ const SearchResults = ({ results, handleSelection }) => {
 
   const routeMap = {
     bag: "bag",
-    wallet: "adventurer",
+    address: "adventurer",
     item: "item"
   };
 
