@@ -10,6 +10,7 @@ import { useQuery } from "graphql-hooks";
 import gradient from "random-gradient";
 import { useRecoilState } from "recoil";
 import { userBags as userBagsAtom } from "../atoms";
+import agld from "../assets/agld.png";
 
 import moralis from "../morialis";
 import ReactHashAvatar from "react-hash-avatar";

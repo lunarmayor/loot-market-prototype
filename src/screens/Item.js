@@ -170,7 +170,8 @@ function User() {
       <Header />
       <Box p={3} pb={2}>
         <H2 mb={3} color="white" fontSize={24}>
-          {Object.keys(itemToPositionMap)[id]}
+          {Object.keys(itemToPositionMap)[id]}{" "}
+          {bags.length && `(${bags.length})`}
         </H2>
       </Box>
       <Box p={3} pt={0}>
